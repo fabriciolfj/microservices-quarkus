@@ -26,6 +26,7 @@ public class Extract {
                 .credit(credit)
                 .debit(BigDecimal.ZERO)
                 .describe("Account creation")
+                .balance(credit)
                 .dataExtract(LocalDateTime.now())
                 .build();
     }

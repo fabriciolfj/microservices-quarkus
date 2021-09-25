@@ -4,5 +4,5 @@ import com.github.fabriciolfj.domain.Account;
 
 public interface SaveAccount {
 
-    String execute(final Account account);
+    void execute(final Account account);
 }

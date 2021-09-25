@@ -17,9 +17,9 @@ public class AccountCreateCase {
 
     public String execute(final Account account) {
         try{
-            final String code = saveAccount.execute(account);
+            saveAccount.execute(account);
             log.info("Account created successfully");
-            return code;
+            return account.getCode();
         } catch (Exception e) {
             throw new AccountCreateException("Account creation failed. Details: " + e.getMessage());
         }

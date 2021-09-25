@@ -1,7 +1,7 @@
 package com.github.fabriciolfj.gateway.database.entities;
 
-import io.quarkus.hibernate.orm.panache.PanacheEntityBase;
 import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -15,24 +15,27 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.Table;
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
 
+@Builder
 @Entity
+@Table(name = "extracts")
 @AllArgsConstructor
 @NoArgsConstructor
 @Getter
 @Setter
 @ToString(onlyExplicitlyIncluded = true)
 @EqualsAndHashCode(onlyExplicitlyIncluded = true)
-public class ExtractEntity extends PanacheEntityBase {
+public class ExtractEntity {
 
     @Id
     @EqualsAndHashCode.Include
     @ToString.Include
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-    @Column(name = "data_extract")
+    @Column(name = "date_extract")
     @ToString.Include
     private LocalDateTime dataExtract;
     @ToString.Include
@@ -42,6 +45,7 @@ public class ExtractEntity extends PanacheEntityBase {
     @ToString.Include
     private BigDecimal balance;
     @ToString.Include
+    @Column(name = "description")
     private String describe;
     @ToString.Include
     @ManyToOne
