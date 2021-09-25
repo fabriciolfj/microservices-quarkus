@@ -27,4 +27,12 @@ public class AccountDTOMapper {
                 .code(code)
                 .build();
     }
+
+    public static final AccountResponse toResponse(final Account account) {
+        return AccountResponse
+                .builder()
+                .code(account.getCode())
+                .customer(account.getCustomer())
+                .build();
+    }
 }
