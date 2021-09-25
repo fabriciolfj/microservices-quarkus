@@ -21,7 +21,7 @@ public class AccountProvider implements SaveAccount, FindAccount {
     @Override
     @Transactional(Transactional.TxType.REQUIRED)
     public void execute(final Account account) {
-        final var entity =AccountEntityMapper.toEntity(account);
+        final var entity = AccountEntityMapper.toEntity(account);
         repository.persist(entity);
     }
 
