@@ -1,4 +1,4 @@
-package com.github.fabriciolfj.domain;
+package com.github.fabriciolfj.controller.dto;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -11,7 +11,7 @@ import java.math.BigDecimal;
 @NoArgsConstructor
 @AllArgsConstructor
 @Data
-public class OperationCredit {
+public class OperationCreditRequest {
 
     private String account;
     private String describe;

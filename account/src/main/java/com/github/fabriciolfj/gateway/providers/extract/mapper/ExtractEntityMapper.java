@@ -9,7 +9,18 @@ import java.util.stream.Collectors;
 
 public class ExtractEntityMapper {
 
-    private ExtractEntityMapper() {
+    private ExtractEntityMapper() { }
+
+    public static final ExtractEntity toEntity(final Extract extract, final AccountEntity entity) {
+        return ExtractEntity
+                .builder()
+                .describe(extract.getDescribe())
+                .dateExtract(extract.getDataExtract())
+                .debit(extract.getDebit())
+                .credit(extract.getCredit())
+                .balance(extract.getBalance())
+                .account(entity)
+                .build();
     }
 
     public static final List<ExtractEntity> toEntity(final List<Extract> extracts, final AccountEntity accountEntity) {
@@ -19,12 +30,22 @@ public class ExtractEntityMapper {
                         ExtractEntity
                                 .builder()
                                 .account(accountEntity)
-                                .dataExtract(extract.getDataExtract())
+                                .dateExtract(extract.getDataExtract())
                                 .balance(extract.getBalance())
                                 .credit(extract.getCredit())
                                 .debit(extract.getDebit())
                                 .describe(extract.getDescribe())
                                 .build())
                 .collect(Collectors.toList());
+    }
+
+    public static final Extract toDomain(final ExtractEntity entity) {
+        return Extract.builder()
+                .balance(entity.getBalance())
+                .dataExtract(entity.getDateExtract())
+                .debit(entity.getDebit())
+                .describe(entity.getDescribe())
+                .credit(entity.getCredit())
+                .build();
     }
 }

@@ -20,6 +20,16 @@ public class Extract {
     private BigDecimal balance;
     private String describe;
 
+    public Extract updateBalance(final Extract extract) {
+        if (this.debit.compareTo(BigDecimal.ZERO) >= 1) {
+            this.balance = extract.getBalance().subtract(this.debit);
+            return this;
+        }
+
+        this.balance = extract.getBalance().add(this.credit);
+        return this;
+    }
+
     public static Extract init(final BigDecimal credit) {
         return Extract
                 .builder()
@@ -28,28 +38,6 @@ public class Extract {
                 .describe("Account creation")
                 .balance(credit)
                 .dataExtract(LocalDateTime.now())
-                .build();
-    }
-
-    public static Extract createdDebit(final OperationDebit operation, final BigDecimal balance) {
-        return Extract
-                .builder()
-                .credit(BigDecimal.ZERO)
-                .debit(operation.getValue())
-                .dataExtract(LocalDateTime.now())
-                .balance(balance.subtract(operation.getValue()))
-                .describe(operation.getDescribe())
-                .build();
-    }
-
-    public static Extract createdCredit(final OperationCredit operation, final BigDecimal balance) {
-        return Extract
-                .builder()
-                .credit(operation.getValue())
-                .debit(BigDecimal.ZERO)
-                .dataExtract(LocalDateTime.now())
-                .balance(balance.add(operation.getValue()))
-                .describe(operation.getDescribe())
                 .build();
     }
 }

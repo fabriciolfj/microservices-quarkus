@@ -37,7 +37,7 @@ public class ExtractEntity {
     private Long id;
     @Column(name = "date_extract")
     @ToString.Include
-    private LocalDateTime dataExtract;
+    private LocalDateTime dateExtract;
     @ToString.Include
     private BigDecimal credit;
     @ToString.Include
