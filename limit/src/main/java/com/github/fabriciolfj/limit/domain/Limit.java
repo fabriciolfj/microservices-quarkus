@@ -1,6 +1,7 @@
 package com.github.fabriciolfj.limit.domain;
 
 import com.github.fabriciolfj.limit.application.port.in.CreateLimitCommand;
+import com.github.fabriciolfj.limit.domain.mapper.LimitMapper;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -8,7 +9,6 @@ import lombok.NoArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 
 import java.math.BigDecimal;
-import java.util.UUID;
 
 @Slf4j
 @Builder
@@ -26,13 +26,7 @@ public class Limit {
         final var type = findType(command.getBalance());
         log.info("Type find: {}", type);
 
-        return Limit
-                .builder()
-                .account(command.getAccount())
-                .dailyWithdrawalAmount(type.getDailyWithdrawalAmount())
-                .dailyOperations(type.getDailyOperations())
-                .code(UUID.randomUUID().toString())
-                .build();
+        return LimitMapper.toDomain(command, type);
     }
 
     private static TypeLimit findType(final BigDecimal balance) {
