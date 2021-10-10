@@ -11,6 +11,8 @@ public class GetLimitCommandMapper {
         return GetLimitCommand
                 .builder()
                 .code(limit.getCode())
+                .dailyOperations(limit.getDailyOperations())
+                .dailyWithdrawalAmount(limit.getDailyWithdrawalAmount())
                 .build();
     }
 }

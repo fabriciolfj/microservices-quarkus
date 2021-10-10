@@ -10,6 +10,8 @@ public class ResponseLimitMapper {
     public static ResponseLimitDTO toDTO(final GetLimitCommand command) {
         return ResponseLimitDTO.builder()
                 .code(command.getCode())
+                .dailyOperations(command.getDailyOperations())
+                .dailyWithdrawalAmount(command.getDailyWithdrawalAmount())
                 .build();
     }
 }

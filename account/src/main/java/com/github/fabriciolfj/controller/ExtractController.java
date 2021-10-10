@@ -1,6 +1,7 @@
 package com.github.fabriciolfj.controller;
 
 import com.github.fabriciolfj.business.usecase.ExtractCreateCase;
+import com.github.fabriciolfj.business.usecase.LimitCase;
 import com.github.fabriciolfj.controller.dto.OperationCreditRequest;
 import com.github.fabriciolfj.controller.dto.OperationDebitRequest;
 import com.github.fabriciolfj.controller.mappers.ExtractMapper;
@@ -25,6 +26,7 @@ import javax.ws.rs.core.Response;
 public class ExtractController {
 
     private final ExtractCreateCase createCase;
+    private final LimitCase limitCase;
 
     @PUT
     @Path("debit")
@@ -32,7 +34,7 @@ public class ExtractController {
         final Extract extract = ExtractMapper.createdDebit(debit);
         log.info("Extract debit request: {}", extract.toString());
 
-        createCase.execute(extract, debit.getAccount());
+        limitCase.execute(extract, debit.getAccount());
         return Response.accepted()
                 .build();
     }
